@@ -15,6 +15,7 @@ class Extractor:
         arch.set_next(self.chain)
         self.chain = arch
         self.parsers.append(arch)
+        return self
 
     def parse(
         self,

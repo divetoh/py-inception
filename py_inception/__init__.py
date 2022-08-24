@@ -1,11 +1,12 @@
 """ Python introspection tool """
 
 from .extractor import Extractor
+from .architect import StdTypesArchitect, FuncArchitect
 from .abstract import AExporter
 from .exporter import JSExporter, JSONExporter, HTMLExporter
 from typing import Type
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 exporters: dict[str, Type[AExporter]] = {
     "js": JSExporter,
@@ -15,6 +16,7 @@ exporters: dict[str, Type[AExporter]] = {
 
 def extract(targets, out: str | None = None):
     e = Extractor()
+    e.append(StdTypesArchitect()).append(FuncArchitect())
     e.extract(targets)
     if not out:
         return e.maze
