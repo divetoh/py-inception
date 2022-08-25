@@ -39,6 +39,14 @@ BODY = """<link rel="icon" href="data:image/svg+xml;utf8, %3Csvg xmlns='http://w
             <div id="out_metaclass" class="out"></div>
         </div>
         <div id="panel-main-tree"> 
+            <div class="tree-svg-menu">
+                <div class="tb-btn tb-toggle" id="act_svg_reverse">Reverse</div>
+                <div class="optgroup tb-toggle">
+                    <div class="tb-btn" id="act_svg_compact">Compact</div>
+                    <div class="tb-btn active" id="act_svg_module">Module</div>
+                    <div class="tb-btn" id="act_svg_metaclass">Metaclass</div>
+                </div>
+            </div>
             <svg id="out_tree"></svg>
         </div>
         <div id="panel-main-object"> 
@@ -51,14 +59,24 @@ SCRIPT = """<script>
     const $Cfg = {
         render: {
             str_trim: 30,
-            svg: {
+            svg_compact: {
+                w: 180,
+                h: 22,
+                x_space: 10,
+                y_space: 10,
+                x_pad: 20,
+                y_pad: 32,
+            },
+            svg_info: {
                 w: 200,
                 h: 42,
                 x_space: 32,
                 y_space: 32,
                 x_pad: 20,
-                y_pad: 20,
+                y_pad: 32,
             },
+            svg_mode: "module",
+            svg_reverse: 0,
         },
         tab: {
             sb: undefined,
@@ -114,6 +132,12 @@ SCRIPT = """<script>
         },
     }
     const $UI = {
+        by_id: {
+            act_svg_reverse: (set) => {$Cfg.render.svg_reverse=set; $Render.tree();},
+            act_svg_compact: () => {$Cfg.render.svg_mode="compact"; $Render.tree();},
+            act_svg_module: () => {$Cfg.render.svg_mode="module"; $Render.tree();},
+            act_svg_metaclass: () => {$Cfg.render.svg_mode="metaclass"; $Render.tree();},
+        },
         set_inspect(){
             $Cfg.cur_inspect = $Cfg.cur_select;
             $Render.mro();
@@ -159,6 +183,21 @@ SCRIPT = """<script>
                 for(const i of tgt.classList) if (i.startsWith("o_")) return $UI.set_select(i.slice(2));
             } else $UI.toggle_fold(tgt);
         },
+        click_tb_btn(tgt){
+            var set = 1;
+            // Click on toolbar button
+            if (tgt.classList.contains("tb-toggle")){
+                if (tgt.classList.contains("active")){
+                    tgt.classList.remove("active");
+                    set = 0;
+                } else tgt.classList.add("active");
+            } else if (tgt.parentNode.classList.contains("tb-toggle")){
+                const l = tgt.parentNode.getElementsByClassName("active");
+                while (l.length>0) l[0].classList.remove("active");
+                tgt.classList.add("active");
+            }
+            if ($UI.by_id[tgt.id]!=undefined) $UI.by_id[tgt.id](set);
+        },
         hl_inspect(){
             const c = $DOM.cls("objinspect");
             while(c.length > 0) c[0].classList.remove("objinspect");
@@ -183,6 +222,7 @@ SCRIPT = """<script>
         init(){
             $DOM.sb_objects_lst.addEventListener("click", (evt) => $UI.click_list(evt.target));
             $DOM.sb_props_lst.addEventListener("click", (evt) => $UI.click_list(evt.target));
+            for(const i of $DOM.cls("tb-btn")) i.addEventListener("click", (evt) => $UI.click_tb_btn(evt.target));
             $UI.hl_inspect();
             $UI.set_tab("object", "main");
             $UI.set_tab("objects", "sb");
@@ -414,16 +454,18 @@ SCRIPT = """<script>
         },
         tree_branch(branch, off_x, off_y){
             // Render main/tree branch on svg canvas.
-            const svg = $Cfg.render.svg;
+            const svg = $Cfg.render[$Cfg.render.svg_mode=="compact" ? "svg_compact" : "svg_info"];
             const half_ydist = (svg.h + svg.y_space) / 2;
             const half_xspace = svg.x_space / 2;
 
             // Render object block
             var block_y = off_y + (branch.count - 1) * half_ydist;
-            const div = $Tpl.div({cls:"blk-head", html:[
-                $Tpl.div({html: $Tpl.span({cls:"o_" + branch.obj, html: $I.objName(branch.obj) }) }),
-                $Tpl.div({cls: "module", html: "🖿 " + $I.objModule(branch.obj) }),
-            ]});
+            const div = $Tpl.div({cls:"blk-head", html:
+                $Tpl.div({html: $Tpl.span({cls:"o_" + branch.obj, html: $I.objName(branch.obj) }) }), });
+            if ($Cfg.render.svg_mode=="module")
+                $Tpl.div({cls: "module", html: "🖿 " + $I.objModule(branch.obj), append_to: div });
+            if ($Cfg.render.svg_mode=="metaclass")
+                $Tpl.div({cls: "module", html: "⟁ " + $I.objClassName(branch.obj), append_to: div });
             div.onclick = () => $UI.set_select(branch.obj);
             $Tpl.svgFO(off_x, block_y, svg.w, svg.h, div, $DOM.main_tree_svg);
 
@@ -434,7 +476,7 @@ SCRIPT = """<script>
             // Vertical-part of link line
             if (branch.children.length > 1) {
                 const vert_y = off_y + (branch.children[0].count - 1) * half_ydist + svg.h / 2;
-                const vert_h = half_ydist * (branch.count * 2 - branch.children[branch.children.length-1].count - 1);
+                const vert_h = half_ydist * (branch.count * 2 - branch.children[branch.children.length-1].count - branch.children[0].count);
                 $Tpl.svgLine(off_x + svg.w + half_xspace, vert_y, 0, vert_h, {append_to: $DOM.main_tree_svg});
             }
             
@@ -451,14 +493,18 @@ SCRIPT = """<script>
         },
         tree(id){
             // Render main/tree (class hierarhy). Rerender on inspect changes.
-            const svg = $Cfg.render.svg;
+            const svg = $Cfg.render[$Cfg.render.svg_mode=="compact" ? "svg_compact" : "svg_info"];
             if (id == undefined) id = $Cfg.cur_inspect;
             if ($I.obj(id).bases == undefined) id = $I.obj(id).class;
 
             // Formating tree struture (nodes may duplicate)
             function make_tree(obj){
                 var res = {obj, children: [], depth: 1, count: 0};
-                for(const c of $I.obj(obj).bases){
+                var lst = [];
+                if ($Cfg.render.svg_reverse=="0") lst = $I.obj(obj).bases;
+                else for(const i in $I.all()) 
+                    if ($I.obj(i).bases && $I.obj(i).bases.includes(parseInt(obj))) lst.push(i);
+                for(const c of lst){
                     if (c == $I.idObject()) continue;
                     const branch = make_tree(c);
                     res.children.push(branch);
@@ -918,6 +964,48 @@ p {
     display: block;
     height: 100%;
     width: 100%;
+}
+
+.tree-svg-menu {
+    position: fixed;
+    top: 0px;
+    padding: 3px 10px;
+    font-size: 80%;
+}
+
+.tree-svg-menu .optgroup {
+    float: left;
+    margin: 0px 10px;
+}
+
+.tree-svg-menu .optgroup .tb-btn {
+    margin: 0px;
+    border-left-width: 0px;
+    border-radius: 0px;
+}
+
+.tree-svg-menu .optgroup :first-child{
+    border-left-width: 1px;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+.tree-svg-menu .optgroup :last-child{
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.tree-svg-menu .tb-btn {
+    float: left;
+    margin: 0px 10px;
+    padding: 2px 5px;
+    background-color: var(--c-back);
+    border-radius: 4px;
+    border: 1px solid var(--c-border);
+    cursor: pointer;
+}
+
+.tree-svg-menu .tb-btn.active {
+    background-color: var(--c-active);
 }
 
 /* Object View CSS */
