@@ -1,6 +1,8 @@
-HEAD = """<!DOCTYPE html><html><head><title>Inception</title>"""
+from . import __version__
 
-BODY = """<link rel="icon" href="data:image/svg+xml;utf8, %3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath style='fill:%23000000;stroke:%23000000;stroke-width:0.172538;stroke-linecap:square;stroke-linejoin:bevel;stroke-dashoffset:5;paint-order:markers stroke fill' d='m 13.177938,0.08716153 c -0.484932,-0.008491 -1.028351,0.03608697 -1.09612,0.89727855 -0.212741,2.85001692 -0.348602,6.58568572 -0.70657,9.61810592 -0.537789,4.55563 0.08265,7.421638 -11.11721364,9.323727 -0.28416718,0.09089 -0.17168286,1.178717 0.0215814,1.313004 5.46144844,2.820784 8.20579594,0.449207 11.80000824,9.747571 0.44161,0.89141 0.990791,0.756204 1.301046,0.769223 V 0.09176527 c -0.06532,-0.0013267 -0.133455,-0.0035379 -0.202732,-0.0047762 z m 0.409361,0 c -0.06928,0.0013267 -0.1374,0.0035379 -0.202733,0.0047762 V 31.756244 c 0.250778,-0.02711 0.425132,0.134313 0.866742,-0.757097 3.210214,-8.757166 8.12889,-7.372908 12.233959,-9.759698 0.193265,-0.134287 0.305749,-1.22211 0.02158,-1.313008 C 15.306985,18.024357 15.927428,15.158349 15.389635,10.602714 15.031671,7.5702983 14.89581,3.8346295 14.683065,0.98461255 14.615287,0.12339002 14.072235,0.07882969 13.587303,0.08733843 Z' /%3E%3Cpath style='fill:%23ffffff;fill-rule:evenodd;stroke:%23ffffff;stroke-width:0.181153px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' d='m 17.160731,22.162537 c 3.099415,-0.160844 6.106251,-0.38196 9.204034,-1.944163 -2.954832,-0.462997 -5.485192,-0.808459 -9.197984,-3.343414 1.393528,1.462451 2.695237,3.020705 4.483925,3.597575 -3.019917,0.997995 -3.060612,0.791034 -4.395131,1.107361 z' /%3E%3Cpath style='fill:%23ffffff;fill-rule:evenodd;stroke:%23ffffff;stroke-width:0.181153px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' d='M 12.397013,22.589734 C 8.6210076,22.083491 3.5162806,22.219299 0.48910593,20.0872 L 2.8053895,19.705483 C 4.89,20.745947 6.3404219,21.621157 12.397013,22.589734 Z' /%3E%3Cpath style='mix-blend-mode:normal;fill:%23ffffff;fill-rule:evenodd;stroke:%23ffffff;stroke-width:0.181153px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' d='M 13.428724,0.55226327 C 12.954579,0.70836152 12.677819,1.0903881 12.57839,1.4752361 c 0.430094,0.4582028 0.248111,2.697492 0.397407,0.9791244 L 12.033782,15.016902 c -0.264948,1.197459 -1.373163,2.609835 -2.5742212,3.390008 1.3921732,0.701038 3.2120492,0.917299 4.8847332,0.629408 -0.729916,-1.44611 -0.9537,-2.937011 -1.043484,-4.439759 L 13.558447,2.0947689 c 0.061,-0.3401506 0.123364,-0.6804339 0.479837,-1.0498698 -0.334706,-0.33917335 -0.491813,-0.44207869 -0.60956,-0.49263583 z' /%3E%3C/svg%3E" />
+HEAD = """<!DOCTYPE html><html><head><meta charset="utf-8"><title>Inception</title>"""
+
+BODY = f"""<link rel="icon" href="data:image/svg+xml;utf8, %3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath style='fill:%23000000;stroke:%23000000;stroke-width:0.172538;stroke-linecap:square;stroke-linejoin:bevel;stroke-dashoffset:5;paint-order:markers stroke fill' d='m 13.177938,0.08716153 c -0.484932,-0.008491 -1.028351,0.03608697 -1.09612,0.89727855 -0.212741,2.85001692 -0.348602,6.58568572 -0.70657,9.61810592 -0.537789,4.55563 0.08265,7.421638 -11.11721364,9.323727 -0.28416718,0.09089 -0.17168286,1.178717 0.0215814,1.313004 5.46144844,2.820784 8.20579594,0.449207 11.80000824,9.747571 0.44161,0.89141 0.990791,0.756204 1.301046,0.769223 V 0.09176527 c -0.06532,-0.0013267 -0.133455,-0.0035379 -0.202732,-0.0047762 z m 0.409361,0 c -0.06928,0.0013267 -0.1374,0.0035379 -0.202733,0.0047762 V 31.756244 c 0.250778,-0.02711 0.425132,0.134313 0.866742,-0.757097 3.210214,-8.757166 8.12889,-7.372908 12.233959,-9.759698 0.193265,-0.134287 0.305749,-1.22211 0.02158,-1.313008 C 15.306985,18.024357 15.927428,15.158349 15.389635,10.602714 15.031671,7.5702983 14.89581,3.8346295 14.683065,0.98461255 14.615287,0.12339002 14.072235,0.07882969 13.587303,0.08733843 Z' /%3E%3Cpath style='fill:%23ffffff;fill-rule:evenodd;stroke:%23ffffff;stroke-width:0.181153px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' d='m 17.160731,22.162537 c 3.099415,-0.160844 6.106251,-0.38196 9.204034,-1.944163 -2.954832,-0.462997 -5.485192,-0.808459 -9.197984,-3.343414 1.393528,1.462451 2.695237,3.020705 4.483925,3.597575 -3.019917,0.997995 -3.060612,0.791034 -4.395131,1.107361 z' /%3E%3Cpath style='fill:%23ffffff;fill-rule:evenodd;stroke:%23ffffff;stroke-width:0.181153px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' d='M 12.397013,22.589734 C 8.6210076,22.083491 3.5162806,22.219299 0.48910593,20.0872 L 2.8053895,19.705483 C 4.89,20.745947 6.3404219,21.621157 12.397013,22.589734 Z' /%3E%3Cpath style='mix-blend-mode:normal;fill:%23ffffff;fill-rule:evenodd;stroke:%23ffffff;stroke-width:0.181153px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' d='M 13.428724,0.55226327 C 12.954579,0.70836152 12.677819,1.0903881 12.57839,1.4752361 c 0.430094,0.4582028 0.248111,2.697492 0.397407,0.9791244 L 12.033782,15.016902 c -0.264948,1.197459 -1.373163,2.609835 -2.5742212,3.390008 1.3921732,0.701038 3.2120492,0.917299 4.8847332,0.629408 -0.729916,-1.44611 -0.9537,-2.937011 -1.043484,-4.439759 L 13.558447,2.0947689 c 0.061,-0.3401506 0.123364,-0.6804339 0.479837,-1.0498698 -0.334706,-0.33917335 -0.491813,-0.44207869 -0.60956,-0.49263583 z' /%3E%3C/svg%3E" />
 <body>
 <div id="main-container">
     <div id="main-sidebar">
@@ -11,7 +13,7 @@ BODY = """<link rel="icon" href="data:image/svg+xml;utf8, %3Csvg xmlns='http://w
                 <path style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.181153px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 12.397013,22.589734 C 8.6210076,22.083491 3.5162806,22.219299 0.48910593,20.0872 L 2.8053895,19.705483 C 4.89,20.745947 6.3404219,21.621157 12.397013,22.589734 Z" />
                 <path style="mix-blend-mode:normal;fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.181153px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 13.428724,0.55226327 C 12.954579,0.70836152 12.677819,1.0903881 12.57839,1.4752361 c 0.430094,0.4582028 0.248111,2.697492 0.397407,0.9791244 L 12.033782,15.016902 c -0.264948,1.197459 -1.373163,2.609835 -2.5742212,3.390008 1.3921732,0.701038 3.2120492,0.917299 4.8847332,0.629408 -0.729916,-1.44611 -0.9537,-2.937011 -1.043484,-4.439759 L 13.558447,2.0947689 c 0.061,-0.3401506 0.123364,-0.6804339 0.479837,-1.0498698 -0.334706,-0.33917335 -0.491813,-0.44207869 -0.60956,-0.49263583 z" />
             </svg>
-            <div> <span class="title">Inception</span><br> <span class="ver">0.0.1</span> </div>
+            <div> <span class="title">Inception</span><br> <span class="ver">{__version__}</span> </div>
         </div>
         <div id="sidebar-menu">
             <div onclick="$UI.set_tab('objects', 'sb')" id="tab-sb-objects">🗐</div>
@@ -55,7 +57,8 @@ BODY = """<link rel="icon" href="data:image/svg+xml;utf8, %3Csvg xmlns='http://w
 </div>
 """
 
-SCRIPT = """<script>
+SCRIPT = """
+<script>
     const $Cfg = {
         render: {
             str_trim: 30,
@@ -105,6 +108,7 @@ SCRIPT = """<script>
         dictType: (id) => model.dicts[id].type,
         list: (id) => model.lists[id].items,
         listType: (id) => model.lists[id].type,
+        func: (id) => model.funcs[id],
         obj: (id) => model.objects[id],
         objClass: (id) => $I.obj(id).class,
         objClassName: (id) => $I.obj($I.obj(id).class).name,
@@ -114,6 +118,7 @@ SCRIPT = """<script>
             if ($I.obj(id)) return "obj";
             if ($I.isList(id)) return "list";
             if ($I.isDict(id)) return "dict";
+            if ($I.isFunc(id)) return "func";
             if ($I.isString(id)) return "string";
             return undefined;
         },
@@ -124,6 +129,7 @@ SCRIPT = """<script>
         isClass: (id) => (($I.obj(id) != undefined) && ($I.obj(id).mro != undefined)),
         isDict: (id) => (model.dicts[id] != undefined),
         isList: (id) => (model.lists[id] != undefined),
+        isFunc: (id) => (model.funcs[id] != undefined),
         isString: (id) => (model.strings[id] != undefined),
         sortByName(a, b) {
             if ($I.objName(a) < $I.objName(b)) return -1;
@@ -224,7 +230,7 @@ SCRIPT = """<script>
             $DOM.sb_props_lst.addEventListener("click", (evt) => $UI.click_list(evt.target));
             for(const i of $DOM.cls("tb-btn")) i.addEventListener("click", (evt) => $UI.click_tb_btn(evt.target));
             $UI.hl_inspect();
-            $UI.set_tab("object", "main");
+            $UI.set_tab("mro", "main");
             $UI.set_tab("objects", "sb");
         },
     }
@@ -253,6 +259,12 @@ SCRIPT = """<script>
         div: (param) => $Tpl.element("div", param),
         badge: (val) => $Tpl.element("span", {cls: "badge", html: val}),
         sign: (val) => $Tpl.element("span", {cls: "sign", html: val}),
+        trprop(name, val, append_to){
+            const tr = $Tpl.element("tr", {append_to: append_to,});
+            $Tpl.element("td", {html: name, append_to: tr} );
+            $Tpl.element("td", {html: val, append_to: tr} );
+            return tr;
+        },
         objitem(id, badge) {
             const e = $Tpl.span({cls: ["objitem", "o_" + id], html: $I.objName(id)});
             if (badge > 0) e.append($Tpl.badge(badge));
@@ -292,7 +304,7 @@ SCRIPT = """<script>
             },
             dict: (blk) => $Tpl.span({html: [blk.type + " ", $Tpl.badge(blk.len)] }),
             dir:  (blk) => $Tpl.span({html: blk.val}),
-            func: (blk) => $Tpl.span({html: [blk.type + "()"] }),
+            func: (blk) => $Tpl.span({html: [$Tpl.sign("ƒ "), blk.type, "()"] }),
             list: (blk) => $Tpl.span({html: [blk.type, $Tpl.badge(blk.len)] }),
             str(blk) {
                 const s = $I.string(blk.id);
@@ -347,6 +359,70 @@ SCRIPT = """<script>
                         });
                     }
                 }
+                return card;
+            },
+            func(id, {level}){
+                const obj = $I.func(id);
+                var header = $Tpl.div({cls: "blk-head", html: $Tpl.div({html: "Callable: " + obj.name }) });
+                var content = $Tpl.div({cls: "content" });
+                var card = $Tpl.div({cls:["full-card"], html: [header, content]});
+
+                const tbl = $Tpl.element("table", {append_to: content});
+                $Tpl.trprop("Module", obj.module, tbl);
+                $Tpl.trprop("Name", obj.name, tbl);
+                $Tpl.trprop("Qualname", obj.qualname, tbl);
+                
+                if (obj.doc){
+                    const tr = $Tpl.trprop("Doc", $Render.prop_line(obj.doc), tbl);
+                    if (obj.doc.id) $Tpl.update(tr, 
+                        {add_cls: "act", onclick: () => $Render.main_object_card(obj.doc.id, level+1),});
+                }
+
+                if (obj.co_filename) {
+                    $Tpl.element("br", {append_to: content});
+                    $Tpl.p({html: ["File: ", obj.co_filename, ":", obj.co_firstlineno], append_to: content});
+                }
+
+                if (obj.pos_args==undefined) return card
+                
+                $Tpl.element("br", {append_to: content});
+                $Tpl.p({html: "Arguments:", append_to: content});
+                const tbl2 = $Tpl.element("table", {append_to: content});
+                function farg(p, append_to) {
+                    const tr = $Tpl.element("tr", {append_to});
+                    $Tpl.element("td", {html: p.name, append_to: tr} );
+                    $Tpl.element("td", {html: p.def ? p.def : " ", append_to: tr} );
+                    $Tpl.element("td", {html: p.ann ? p.ann : " ", append_to: tr} );
+                    return tr;
+                }
+                const tr = $Tpl.element("tr", {append_to: tbl2});
+                $Tpl.element("th", {html: "Name", append_to: tr} );
+                $Tpl.element("th", {html: "Default", append_to: tr} );
+                $Tpl.element("th", {html: "Annotation", append_to: tr} );
+                
+                if (obj.posonlyargcount>0) 
+                    $Tpl.element("td", {html: "Position only args", cls: "center", append_to:
+                        $Tpl.element("tr", {append_to: tbl2})
+                    } ).colSpan = 3;
+                
+                for(const i in obj.pos_args) {
+                    if (obj.posonlyargcount == i)
+                        $Tpl.element("td", {html: "Position/KW args", cls: "center", append_to: 
+                            $Tpl.element("tr", {append_to: tbl2})
+                        } ).colSpan = 3;
+                    const p = obj.pos_args[i];
+                    farg(p, tbl2);
+                }
+
+                if (obj.kw_args.length > 0)
+                    $Tpl.element("td", {html: "KW only args", cls: "center", 
+                        append_to: $Tpl.element("tr", {append_to: tbl2})
+                    } ).colSpan = 3;
+                for(const i in obj.kw_args) {
+                    const p = obj.kw_args[i];
+                    farg(p, tbl2);
+                }
+
                 return card;
             },
             string(id, {level}) {
@@ -421,6 +497,7 @@ SCRIPT = """<script>
                 $Tpl.div({html:  $Tpl.span({cls: ["o_" + id], html: $I.objName(id) }) }),
                 $Tpl.div({cls: "module", html: "🖿 " + $I.objModule(id) }),
             ]});
+
             header.onclick = () => $UI.set_select(id);
             const content = $Tpl.div({cls: ["content", "scroll6"]});
 
@@ -583,7 +660,7 @@ SCRIPT = """<script>
                     const blk = $Render.prop_block(prop);
                     const ico = blk ? "unfold" : "dot";
                     const target = prop.mode == "func" ? content_f : content;
-                    target.push($Tpl.lstLine(ico, [$Tpl.span({cls: ["propname", prop.mode], html: d}), ": ", el]));
+                    target.push($Tpl.lstLine(ico, [$Tpl.span({cls: "propname", html: d}), ": ", el]));
                     if (blk) target.push($Tpl.update(blk, {add_cls: ["_lst_bl", "_lst_val"], display: "none"}))
                 }
                 $Tpl.div({cls: "_lst_bl", html: content_f.concat(content), append_to: $DOM.sb_props_lst});
@@ -691,9 +768,10 @@ p {
     cursor: pointer;
 }
 
-.lmarg{ margin-left: 14px; }
+.lmarg { margin-left: 14px; }
 .act { cursor: pointer; }
-
+.bold {font-weight: bold;}
+.center {text-align: center;}
 .lens {
     display: inline-block;
     cursor: pointer;
@@ -704,11 +782,6 @@ p {
 .lens:hover { background-color: var(--c-active); }
 
 .propname { font-weight: bold; }
-.propname.func::before{
-    content: "ƒ ";
-    color: var(--c-active);
-    font-style: italic;
-}
 
 .objinspect {
     border: 1px dashed var(--c-inspect);
@@ -917,6 +990,7 @@ p {
 }
 
 /* MRO View CSS */
+
 #panel-main-mro.active {
     display: flex;
     flex-flow: column wrap;
@@ -1039,7 +1113,7 @@ p {
     min-height: 60px;
     background-color: var(--c-cardbg);
     border: 1px solid var(--c-divider);
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 .full-card .content { padding: 10px; }
@@ -1051,14 +1125,25 @@ p {
 
 .full-card table {
     width: 100%;
+    min-width: 100%;
+    max-width: 100%;
     background-color: var(--c-backwhite);
     border: 1px solid var(--c-border);
     border-collapse: collapse; 
+    overflow: auto;
+}
+.full-card table th{ 
+    background-color: var(--c-cardheaderbg); 
+    font-weight: normal;
 }
 .full-card table tr{ border-bottom: 1px solid var(--c-back); }
 .full-card table tr:hover{ background-color: var(--c-back); }
 .full-card table tr.act:hover{ background-color: var(--c-bagebg); }
-.full-card table td { padding: 1px 8px; }
-.full-card table td:first-child { width: 1%; }
+.full-card table td { 
+    padding: 1px 8px; 
+    border-right: 1px solid var(--c-back);
+    word-wrap: break-word;
+    word-break: break-all;
+}
 </style>
 """

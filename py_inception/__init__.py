@@ -1,18 +1,23 @@
 """ Python introspection tool """
 
-from .extractor import Extractor
-from .architect import StdTypesArchitect, FuncArchitect
-from .abstract import AExporter
-from .exporter import JSExporter, JSONExporter, HTMLExporter
+
+__version__ = "0.0.3"
+
 from typing import Type
 
-__version__ = "0.0.2"
+from .extractor import Extractor
+
+from .abstract import AExporter
+from .architect import FuncArchitect, StdTypesArchitect
+from .exporter import HTMLExporter, JSExporter, JSONExporter
+
 
 exporters: dict[str, Type[AExporter]] = {
     "js": JSExporter,
     "json": JSONExporter,
     "html": HTMLExporter,
 }
+
 
 def extract(targets, out: str | None = None):
     e = Extractor()
@@ -21,10 +26,10 @@ def extract(targets, out: str | None = None):
     if not out:
         return e.maze
 
-    try: 
+    try:
         _, ext = out.rsplit(".", 1)
         exporter = exporters[ext](e.maze)
-    except:
+    except Exception:
         exporter = JSONExporter(e.maze)
-    
+
     exporter.export(out)

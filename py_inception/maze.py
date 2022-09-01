@@ -1,11 +1,13 @@
 import json
 
+
 class Maze:
     def __init__(self):
         self.objects = {}
         self.strings = {}
         self.lists = {}
         self.dicts = {}
+        self.funcs = {}
         self.targets = []
         self.object = id(object)
         self.type = id(type)
@@ -14,6 +16,7 @@ class Maze:
             "strings",
             "lists",
             "dicts",
+            "funcs",
             "targets",
             "object",
             "type",
@@ -31,4 +34,4 @@ class Maze:
         return js
 
     def get_json(self):
-        return json.dumps(self.get_model())
+        return json.dumps(self.get_model(), indent=1)
